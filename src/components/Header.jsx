@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import '../index.css';
 import united_logo from '../assets/image/united_logo.png';
 import profile_picture from '../assets/image/profile_picture.jpg';
@@ -15,14 +16,11 @@ function Header() {
 
             <div className="flex justify-end items-center gap-2">
                 <button className="w-12 rounded-md hover:bg-zinc-200 px-2 aspect-square">
-                    <span className="material-symbols-rounded text-zinc-400 text-3xl align-middle">mail</span>
-                </button>
-                <button className="w-12 rounded-md hover:bg-zinc-200 px-2 aspect-square">
                     <span className=" material-symbols-rounded text-zinc-400 text-3xl align-middle">notifications</span>
                 </button>
-                <button className="w-16 rounded-md hover:bg-zinc-200 px-2 aspect-square">
+                <Link to={'perfil'} className="w-16 rounded-md hover:bg-zinc-200 px-2 aspect-square">
                     <img className="material-symbols-rounded text-zinc-400 text-5xl align-middle rounded-full" src={profile_picture} />
-                </button>
+                </Link>
             </div>
         </header>
     );
