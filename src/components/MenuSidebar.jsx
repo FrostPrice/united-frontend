@@ -9,7 +9,7 @@ function MenuSidebar() {
                     <span className="material-symbols-rounded text-3xl">home</span>
                     <span className="text-xl">Home</span>
                 </Link>
-                <button disabled="true" className="flex w-full items-center gap-4 py-4 ps-4 bg-zinc-300">
+                <button disabled={true} className="flex w-full items-center gap-4 py-4 ps-4 bg-zinc-300">
                     <span className="material-symbols-rounded text-3xl">payments</span>
                     <span className="text-xl">Financeiro</span>
                 </button>
