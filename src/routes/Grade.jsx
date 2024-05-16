@@ -1,7 +1,14 @@
+import GradeNotification from '../components/grade/GradeNotification';
+import '../index.css'
 function Grade() {
     return (
         <div>
-            <h1>Notas</h1>
+            <div className='flex gap-8'>
+                <GradeNotification title='Estatística - Prova M1'/>
+                <GradeNotification title='Estatística - Prova M1'/>
+                <GradeNotification title='Estatística - Prova M1'/>
+                <GradeNotification title='Estatística - Prova M1'/>
+            </div>
         </div>
     );
 }
