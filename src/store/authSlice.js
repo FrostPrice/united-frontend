@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import ApiService from "../ApiService";
 
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post("/api/auth/login", userData);
+      const response = await ApiService.post("/api/auth/login", userData);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -17,7 +17,7 @@ export const logoutUser = createAsyncThunk(
   "auth/logoutUser",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.post("/api/auth/logout");
+      const response = await ApiService.post("/api/auth/logout");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -29,7 +29,7 @@ export const checkSession = createAsyncThunk(
   "auth/checkSession",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get("/api/auth/check");
+      const response = await ApiService.get("/api/auth/check");
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
