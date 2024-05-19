@@ -11,8 +11,8 @@ function Header() {
   const navigate = useNavigate();
   const { loading, user, error } = useSelector((state) => state.auth);
 
-  const logoutUserHandler = () => {
-    dispatch(logoutUser());
+  const logoutUserHandler = async () => {
+    await dispatch(logoutUser());
 
     if (loading) {
       // Mostra um spinner ou uma mensagem de carregamento enquanto a sessão é verificada

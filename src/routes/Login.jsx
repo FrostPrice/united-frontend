@@ -16,9 +16,9 @@ const Login = () => {
     }
   }, [user, navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginUser({ username, password }));
+    await dispatch(loginUser({ username, password }));
   };
 
   return (

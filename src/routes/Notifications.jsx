@@ -10,14 +10,22 @@ function Notification() {
   const notificationStatus = useSelector((state) => state.notifications.status);
 
   useEffect(() => {
-    if (notificationStatus === "idle") {
-      dispatch(get());
+    async function fetchNotifications() {
+      if (notificationStatus === "idle") {
+        await dispatch(get());
+      }
     }
+
+    fetchNotifications();
   }, [notificationStatus, dispatch]);
 
   const markAsReadHandler = (id) => {
-    dispatch(markAsRead(id));
-    dispatch(put({ id }));
+    async function awaitDispatch() {
+      await dispatch(markAsRead(id));
+      await dispatch(put({ id }));
+    }
+
+    awaitDispatch();
   };
 
   return (
