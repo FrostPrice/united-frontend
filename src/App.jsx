@@ -5,14 +5,33 @@ import { checkSession } from "./store/authSlice";
 import Header from "./components/Header";
 import MenuSidebar from "./components/MenuSidebar";
 import "./index.css";
+import { fetchUser } from "./store/userSlice";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const { user, loading, error } = useSelector((state) => state.auth);
+  const { user, loadingAuth, error } = useSelector((state) => state.auth);
+  const userState = useSelector((state) => state.user);
+  const loading = loadingAuth || userState.loading;
 
+  // Fetch user data
   useEffect(() => {
-    dispatch(checkSession());
+    async function fetchUserData() {
+      if (!userState.userInfo && user) {
+        await dispatch(fetchUser(user));
+      }
+    }
+
+    fetchUserData();
+  }, [dispatch, user, userState.userInfo]);
+
+  // Used for checking the session
+  useEffect(() => {
+    async function fetchSession() {
+      await dispatch(checkSession());
+    }
+
+    fetchSession();
   }, [dispatch, location]);
 
   if (loading) {
@@ -32,7 +51,9 @@ function App() {
         <MenuSidebar />
         <div className="w-full h-full m-16">
           <div className="">
-            <h1 className="text-2xl font-bold mb-6">Olá Cleiton Prange</h1>
+            <h1 className="text-2xl font-bold mb-6">
+              Olá {userState?.userInfo?.name ? userState.userInfo.name : ""}
+            </h1>
           </div>
           <Outlet />
         </div>
