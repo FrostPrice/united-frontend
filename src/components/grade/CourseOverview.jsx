@@ -36,7 +36,7 @@ function CourseOverview({course}) {
     const [active, setActive] = useState(false);
 
     return (
-        <div className="flex flex-col gap-4 bg-white rounded-md border-2 border-zinc-300 px-4 py-2">
+        <div className="h-fit flex flex-col gap-4 bg-white rounded-md border-2 border-zinc-300 px-4 py-2">
             <div className="flex justify-between">
                 <div>
                     <h2 className="text-lg font-bold line-clamp-1">{title}</h2>
