@@ -16,6 +16,7 @@ import Grades from "./routes/Grades.jsx";
 import Profile from "./routes/Profile.jsx";
 import Notifications from "./routes/Notifications.jsx";
 import Login from "./routes/Login.jsx";
+import SubjectDetail from "./routes/SubjectDetail.jsx";
 
 const router = createBrowserRouter([
   { path: "/login", element: <Login /> },
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/material",
         element: <Material />,
+      },
+      {
+        path: "/material/:id",
+        element: <SubjectDetail />,
       },
       {
         path: "/calendario",
