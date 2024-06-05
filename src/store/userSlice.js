@@ -3,7 +3,7 @@ import ApiService from "../ApiService";
 
 // Thunks para operações assíncronas
 export const fetchUser = createAsyncThunk("user/fetchUser", async (userId) => {
-  const response = await ApiService.get("api/users", userId);
+  const response = await ApiService.get("/api/users", userId);
   return response.data.data;
 });
 
@@ -12,7 +12,7 @@ export const updateUser = createAsyncThunk(
   async (userData) => {
     const { userId, ...data } = userData;
 
-    const response = await ApiService.update("api/users", userId, data);
+    const response = await ApiService.update("/api/users", userId, data);
     return response.data;
   }
 );
