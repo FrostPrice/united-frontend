@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ApiService from "../ApiService";
 
 export const fetchEvents = createAsyncThunk("events/fetchEvents", async () => {
-  const response = await ApiService.get("api/events");
+  const response = await ApiService.get("/api/events");
   return response.data.data;
 });
 
