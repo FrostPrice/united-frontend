@@ -1,23 +1,21 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NotificationCard from "../components/notifications/NotificationsCard";
-import { get, markAsRead, put } from "../store/notificationSlice";
+import { getNotifications, markAsRead, put } from "../store/notificationSlice";
 
 function Notification() {
   const notifications = useSelector((state) => state.notifications);
   const dispatch = useDispatch();
-
   const notificationStatus = useSelector((state) => state.notifications.status);
 
+  // Component Did Mount
   useEffect(() => {
     async function fetchNotifications() {
-      if (notificationStatus === "idle") {
-        await dispatch(get());
-      }
+      await dispatch(getNotifications());
     }
 
     fetchNotifications();
-  }, [notificationStatus, dispatch]);
+  }, [dispatch]);
 
   const markAsReadHandler = (id) => {
     async function awaitDispatch() {
@@ -44,7 +42,6 @@ function Notification() {
               title={notification.title}
               description={notification.description}
               date={notification.date}
-              price={notification.price}
               onMarkAsRead={() => markAsReadHandler(notification.id)}
             />
           ))

@@ -20,11 +20,14 @@ const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(new Date());
 
+  // Component Did Mount
   useEffect(() => {
-    if (eventStatus === "idle") {
-      dispatch(fetchEvents());
+    async function fetchData() {
+      await dispatch(fetchEvents());
     }
-  }, [eventStatus, dispatch]);
+
+    fetchData();
+  }, [dispatch]);
 
   const startMonth = startOfMonth(currentDate);
   const endMonth = endOfMonth(currentDate);

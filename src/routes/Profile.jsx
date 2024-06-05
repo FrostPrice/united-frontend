@@ -10,6 +10,7 @@ function Profile() {
   const { user } = useSelector((state) => state.auth);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
+  // Component Did Mount
   useEffect(() => {
     async function fetchUserData() {
       if (user) await dispatch(fetchUser(user));
