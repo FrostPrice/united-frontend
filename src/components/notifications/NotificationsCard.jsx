@@ -6,7 +6,6 @@ const NotificationCard = ({
   title,
   description,
   date,
-  price,
   onMarkAsRead,
 }) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -22,7 +21,6 @@ const NotificationCard = ({
       </div>
       <div className="text-right">
         <p className="text-gray-500">{date}</p>
-        {price && <p className="font-bold">{price}</p>}
       </div>
       <div className="justify-self-end">
         <button
