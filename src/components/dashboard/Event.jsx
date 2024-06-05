@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchEvents } from "../../store/eventsSlice";
+import { format } from "date-fns";
+import { ptBR } from "date-fns/locale";
 
 const Events = () => {
   const dispatch = useDispatch();
@@ -30,8 +32,7 @@ const Events = () => {
             <th className="border px-4 py-2">Nome</th>
             <th className="border px-4 py-2">Início</th>
             <th className="border px-4 py-2">Fim</th>
-            <th className="border px-4 py-2">Custo</th>
-            <th className="border px-4 py-2">Público</th>
+            <th className="border px-4 py-2">Descrição</th>
           </tr>
         </thead>
         <tbody>
@@ -44,11 +45,18 @@ const Events = () => {
           )}
           {events.map((event, index) => (
             <tr key={index}>
-              <td className="border px-4 py-2">{event.name}</td>
-              <td className="border px-4 py-2">{event.start}</td>
-              <td className="border px-4 py-2">{event.end}</td>
-              <td className="border px-4 py-2">{event.cost}</td>
-              <td className="border px-4 py-2">{event.audience}</td>
+              <td className="border px-4 py-2">{event.title}</td>
+              <td className="border px-4 py-2">
+                {format(event.date_begin, "d, MMMM yyyy, hh:mm", {
+                  locale: ptBR,
+                })}
+              </td>
+              <td className="border px-4 py-2">
+                {format(event.date_end, "d, MMMM yyyy, hh:mm", {
+                  locale: ptBR,
+                })}
+              </td>
+              <td className="border px-4 py-2">{event.description}</td>
             </tr>
           ))}
         </tbody>
