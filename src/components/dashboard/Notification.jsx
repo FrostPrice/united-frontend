@@ -42,7 +42,9 @@ const Notification = () => {
           </div>
         ))
       ) : (
-        <p>No new notifications</p>
+        <p className="p-4 bg-white shadow rounded-lg mb-4 col-span-4">
+          Nenhuma notificação nova
+        </p>
       )}
     </div>
   );
