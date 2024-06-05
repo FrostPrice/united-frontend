@@ -23,6 +23,10 @@ const Events = () => {
     return <div>Error: {error}</div>;
   }
 
+  const nextEvents = events.filter(
+    (event) => new Date(event.date_begin) > new Date()
+  );
+
   return (
     <div className="p-4 bg-white shadow rounded-lg">
       <h2 className="text-lg font-semibold">Eventos</h2>
@@ -36,14 +40,14 @@ const Events = () => {
           </tr>
         </thead>
         <tbody>
-          {events.length === 0 && (
+          {nextEvents.length === 0 && (
             <tr>
               <td className="border px-4 py-2" colSpan="5">
                 Nenhum evento encontrado
               </td>
             </tr>
           )}
-          {events.map((event, index) => (
+          {nextEvents.map((event, index) => (
             <tr key={index}>
               <td className="border px-4 py-2">{event.title}</td>
               <td className="border px-4 py-2">
