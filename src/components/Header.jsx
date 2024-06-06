@@ -1,5 +1,4 @@
 import {Link, useLocation, useNavigate} from 'react-router-dom';
-import '../index.css';
 import united_logo from '../assets/image/united_logo.png';
 import profile_picture from '../assets/image/profile_picture.jpg';
 import {logoutUser} from '../store/authSlice';
