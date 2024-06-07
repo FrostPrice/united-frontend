@@ -1,5 +1,3 @@
-import '../../index.css';
-
 function Grade({name, grade, weight}) {
     let color;
     if (grade == -1) {

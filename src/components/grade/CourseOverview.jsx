@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import '../../index.css';
 import Grade from './Grade';
 
 function CourseOverview({course}) {
