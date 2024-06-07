@@ -10,6 +10,18 @@ export const getAssessments = createAsyncThunk(
   }
 );
 
+// Thunk para fazer upload do arquivo
+export const uploadFile = createAsyncThunk(
+  "api/uploadFile",
+  async ({ assessmentId, formData }) => {
+    const response = await ApiService.post(
+      `/api/assessments/${assessmentId}/upload`,
+      formData
+    );
+    return response.data;
+  }
+);
+
 const assessmentsSlice = createSlice({
   name: "assessments",
   initialState: {
@@ -28,6 +40,13 @@ const assessmentsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getAssessments.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message;
+      })
+      .addCase(uploadFile.fulfilled, (state) => {
+        state.status = "succeeded";
+      })
+      .addCase(uploadFile.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
       });
