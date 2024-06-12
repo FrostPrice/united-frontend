@@ -15,6 +15,16 @@ const SubjectAssessments = ({ subjectAssessments }) => {
     setSelectedAssessmentId(null);
   };
 
+  const assessmentStatus = (dueDate, filePath) => {
+    if (
+      new Date(dueDate).toLocaleDateString() < new Date().toLocaleDateString()
+    )
+      return "Atrasado";
+    if (filePath) return "Enviado";
+
+    return "Pendente";
+  };
+
   return (
     <div>
       <UploadModal
@@ -45,7 +55,7 @@ const SubjectAssessments = ({ subjectAssessments }) => {
                 {new Date(assessment.dueDate).toLocaleDateString()}
               </td>
               <td className="border px-4 py-2 text-center w-28">
-                {assessment.filePath ? "Enviado" : "Pendente"}
+                {assessmentStatus(assessment.dueDate, assessment.filePath)}
               </td>
               <td className="border px-4 py-2 text-center w-24">
                 <button

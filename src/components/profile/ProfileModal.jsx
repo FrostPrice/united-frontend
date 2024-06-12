@@ -75,6 +75,7 @@ const ProfileModal = ({ isOpen, onRequestClose }) => {
             name="telephone1"
             value={formData.telephone1}
             onChange={handleChange}
+            placeholder="(XX) XXXXX-XXXX"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
@@ -87,6 +88,7 @@ const ProfileModal = ({ isOpen, onRequestClose }) => {
             name="telephone2"
             value={formData.telephone2}
             onChange={handleChange}
+            placeholder="(XX) XXXXX-XXXX"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
