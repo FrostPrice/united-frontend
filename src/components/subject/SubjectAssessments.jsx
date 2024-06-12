@@ -45,14 +45,14 @@ const SubjectAssessments = ({ subjectAssessments }) => {
                 {new Date(assessment.dueDate).toLocaleDateString()}
               </td>
               <td className="border px-4 py-2 text-center w-28">
-                {assessment.status}
+                {assessment.filePath ? "Enviado" : "Pendente"}
               </td>
               <td className="border px-4 py-2 text-center w-24">
                 <button
                   className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
                   onClick={() => openModal(assessment.id)}
                 >
-                  Ver
+                  Enviar Arquivo
                 </button>
               </td>
             </tr>
