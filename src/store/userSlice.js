@@ -9,11 +9,14 @@ export const fetchUser = createAsyncThunk("user/fetchUser", async (userId) => {
 
 export const updateUser = createAsyncThunk(
   "user/updateUser",
-  async (userData) => {
+  async (userData, { rejectWithValue }) => {
     const { userId, ...data } = userData;
-
-    const response = await ApiService.update("/api/users", userId, data);
-    return response.data;
+    try {
+      const response = await ApiService.update("/api/users", userId, data);
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -23,6 +26,8 @@ const userSlice = createSlice({
     userInfo: null,
     status: "idle",
     error: null,
+    updateStatus: "idle",
+    updateError: null,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -39,15 +44,15 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
       .addCase(updateUser.pending, (state) => {
-        state.status = "loading";
+        state.updateStatus = "loading";
       })
       .addCase(updateUser.fulfilled, (state) => {
-        state.status = "succeeded";
-        // state.userInfo = { ...state.userInfo, ...action.payload };
+        state.updateStatus = "succeeded";
+        state.updateError = null;
       })
       .addCase(updateUser.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
+        state.updateStatus = "failed";
+        state.updateError = action.payload.msg;
       });
   },
 });

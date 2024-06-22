@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUser, fetchUser } from "../../store/userSlice";
@@ -8,6 +8,7 @@ Modal.setAppElement("#root");
 const ProfileModal = ({ isOpen, onRequestClose }) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
+  const updateError = useSelector((state) => state.user.updateError);
   const userId = useSelector((state) => state.auth.user);
 
   const [formData, setFormData] = useState({
@@ -26,9 +27,11 @@ const ProfileModal = ({ isOpen, onRequestClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await dispatch(updateUser({ userId, ...formData }));
-    await dispatch(fetchUser(userId));
-    onRequestClose();
+    const resultAction = await dispatch(updateUser({ userId, ...formData }));
+    if (updateUser.fulfilled.match(resultAction)) {
+      await dispatch(fetchUser(userId));
+      onRequestClose();
+    }
   };
 
   return (
@@ -41,6 +44,7 @@ const ProfileModal = ({ isOpen, onRequestClose }) => {
       <h2 className="text-2xl font-semibold mb-4">
         Atualizar Informações do Usuário
       </h2>
+      {updateError && <div className="mb-4 text-red-500">{updateError}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
